@@ -122,16 +122,20 @@ int is_valid(Node *n) {
 List* get_adj_nodes(Node* n) {
     List* list = createList();
 
-    for(int i = 0; i < 9; i++) {
-        for(int j = 0; j < 9; j++) {
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
             if (n->sudo[i][j] == 0) {
-                for (int num = 1; num <= 3; num++) {  // Changed the loop condition to generate only 3 nodes
+                for (int num = 1; num <= 3; num++) {
                     Node* new_node = copy(n);
                     new_node->sudo[i][j] = num;
                     if (is_valid(new_node)) {
-                        pushBack(list, new_node);
+                        if (!is_node_in_list(list, new_node)) { // Check if node already exists in list
+                            pushBack(list, new_node);
+                        } else {
+                            free(new_node); // Free the duplicate node
+                        }
                     } else {
-                        free(new_node); // Free invalid node
+                        free(new_node);
                     }
                 }
             }
@@ -139,6 +143,28 @@ List* get_adj_nodes(Node* n) {
     }
 
     return list;
+}
+
+int is_node_in_list(List* list, Node* n) {
+    Node* current = first(list);
+    while (current != NULL) {
+        if (compare_nodes(current, n) == 1) {
+            return 1; // Node already exists in the list
+        }
+        current = next(list);
+    }
+    return 0; // Node not found in the list
+}
+
+int compare_nodes(Node* n1, Node* n2){
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+            if (n1->sudo[i][j] != n2->sudo[i][j]) {
+                return 0; // Nodes differ
+            }
+        }
+    }
+    return 1; // Nodes are the same
 }
 
 int is_final(Node* n) {

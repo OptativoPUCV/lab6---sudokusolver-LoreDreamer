@@ -40,3 +40,18 @@ Tue 14 May 2024 10:49:12 PM UTC:
  tests:  6|2
 total_score: 45/70
 796cc6a
+Tue 14 May 2024 10:52:13 PM UTC: 
+ sudoku.c | 30 ++++++++++++++++++++++++++++--
+ 1 file changed, 28 insertions(+), 2 deletions(-)
+In file included from test.c:5:
+sudoku.c: In function ‘get_adj_nodes’:
+sudoku.c:132:30: error: implicit declaration of function ‘is_node_in_list’ [-Werror=implicit-function-declaration]
+  132 |                         if (!is_node_in_list(list, new_node)) { // Check if node already exists in list
+      |                              ^~~~~~~~~~~~~~~
+sudoku.c: In function ‘is_node_in_list’:
+sudoku.c:151:13: error: implicit declaration of function ‘compare_nodes’ [-Werror=implicit-function-declaration]
+  151 |         if (compare_nodes(current, n) == 1) {
+      |             ^~~~~~~~~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+0c17759
