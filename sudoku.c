@@ -53,10 +53,11 @@ void print_node(Node* n){
 
 int is_valid(Node *n) {
 
+    int row_check[10] = {0};
+    int col_check[10] = {0};
+    int sub_check[10] = {0};
+    
     for (int i = 0; i < 9; i++) {
-        
-        int row_check[10] = {0};
-        
         for (int j = 0; j < 9; j++) {
             
             int num = n->sudo[i][j];
@@ -74,9 +75,6 @@ int is_valid(Node *n) {
     }
 
     for (int j = 0; j < 9; j++) {
-        
-        int col_check[10] = {0};
-        
         for (int i = 0; i < 9; i++) {
             
             int num = n->sudo[i][j];
@@ -94,9 +92,6 @@ int is_valid(Node *n) {
     }
 
     for (int k = 0; k < 9; k++) {
-        
-        int sub_check[10] = {0};
-        
         for (int p = 0; p < 9; p++) {
             
             int x = 3 * (k / 3) + (p / 3);
@@ -155,6 +150,7 @@ int is_final(Node* n) {
 }
 
 Node* DFS(Node* initial, int* cont) {
+    
     Stack* stack = createStack();
     push(stack, initial);
 
