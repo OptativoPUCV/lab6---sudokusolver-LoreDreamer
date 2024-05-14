@@ -119,28 +119,27 @@ int is_valid(Node *n) {
 }
 
 
-List* get_adj_nodes(Node* n){
-   
-   List* list = createList();
-
-   for(int i = 0; i < 9; i++) {
-       
-      for(int j = 0; j < 9; j++) {
-         
-         if (n->sudo[i][j] == 0) {
-            
-            for (int num = 1; num <= 9; num++) {
-               
+List* get_adj_nodes(Node* n) {
+    List* list = createList();
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
+            if (n->sudo[i][j] == 0) {
+                for (int num = 1; num <= 9; num++) {
                     Node* new_node = copy(n);
                     new_node->sudo[i][j] = num;
-                    pushBack(list, new_node);
-               
+                    if (is_valid(new_node)) {
+                        pushBack(list, new_node);
+                        break;  // Stop generating nodes for this cell once a valid number is found
+                    } else {
+                        free(new_node); // Free the node if it's not valid
+                    }
                 }
             }
         }
     }
     return list;
 }
+
 
 
 int is_final(Node* n) {
