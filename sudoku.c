@@ -43,29 +43,81 @@ void print_node(Node* n){
     printf("\n");
 }
 
-int is_valid(Node* n){
+int is_valid(Node *n) {
+    int i, j;
+
+    // Check rows
+    for (i = 0; i < 9; i++) {
+        int row_check[10] = {0};
+        for (j = 0; j < 9; j++) {
+            int num = n->sudo[i][j];
+            if (num != 0) {
+                if (row_check[num] == 1) {
+                    return 0;
+                } else {
+                    row_check[num] = 1;
+                }
+            }
+        }
+    }
+
+    // Check columns
+    for (j = 0; j < 9; j++) {
+        int col_check[10] = {0};
+        for (i = 0; i < 9; i++) {
+            int num = n->sudo[i][j];
+            if (num != 0) {
+                if (col_check[num] == 1) {
+                    return 0;
+                } else {
+                    col_check[num] = 1;
+                }
+            }
+        }
+    }
+
+    // Check submatrices
+    for (int k = 0; k < 9; k++) {
+        int sub_check[10] = {0};
+        for (int p = 0; p < 9; p++) {
+            int x = 3 * (k / 3) + (p / 3);
+            int y = 3 * (k % 3) + (p % 3);
+            int num = n->sudo[x][y];
+            if (num != 0) {
+                if (sub_check[num] == 1) {
+                    return 0;
+                } else {
+                    sub_check[num] = 1;
+                }
+            }
+        }
+    }
 
     return 1;
 }
 
 
 List* get_adj_nodes(Node* n){
-    List* list = createList();
-    int i, j;
+   
+   List* list = createList();
+   int i, j;
 
-    for(i = 0; i < 9; i++) {
-        for(j = 0; j < 9; j++) {
-            if(n->sudo[i][j] == 0) {
-                for(int num = 1; num <= 9; num++) {
+   for(i = 0; i < 9; i++) {
+      for(j = 0; j < 9; j++) {
+         
+         if(n->sudo[i][j] == 0) {
+            
+            for(int num = 1; num <= 9; num++) {
+               
                     Node* new_node = copy(n);
                     new_node->sudo[i][j] = num;
                     pushBack(list, new_node);
+               
                 }
                 return list;
             }
         }
     }
-
     return list;
 }
 
