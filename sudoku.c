@@ -52,51 +52,65 @@ void print_node(Node* n){
 }
 
 int is_valid(Node *n) {
-    int i, j;
 
-    // Check rows
-    for (i = 0; i < 9; i++) {
+    for (int i = 0; i < 9; i++) {
+        
         int row_check[10] = {0};
-        for (j = 0; j < 9; j++) {
+        
+        for (int j = 0; j < 9; j++) {
+            
             int num = n->sudo[i][j];
+            
             if (num != 0) {
+                
                 if (row_check[num] == 1) {
                     return 0;
                 } else {
                     row_check[num] = 1;
                 }
+                
             }
         }
     }
 
-    // Check columns
-    for (j = 0; j < 9; j++) {
+    for (int j = 0; j < 9; j++) {
+        
         int col_check[10] = {0};
-        for (i = 0; i < 9; i++) {
+        
+        for (int i = 0; i < 9; i++) {
+            
             int num = n->sudo[i][j];
+            
             if (num != 0) {
+                
                 if (col_check[num] == 1) {
                     return 0;
                 } else {
                     col_check[num] = 1;
                 }
+                
             }
         }
     }
 
-    // Check submatrices
     for (int k = 0; k < 9; k++) {
+        
         int sub_check[10] = {0};
+        
         for (int p = 0; p < 9; p++) {
+            
             int x = 3 * (k / 3) + (p / 3);
             int y = 3 * (k % 3) + (p % 3);
             int num = n->sudo[x][y];
+            
             if (num != 0) {
+                
                 if (sub_check[num] == 1) {
                     return 0;
                 } else {
                     sub_check[num] = 1;
                 }
+                
             }
         }
     }
@@ -130,11 +144,15 @@ List* get_adj_nodes(Node* n){
 
 
 int is_final(Node* n) {
+    
     for (int i = 0; i < 9; i++) {
+        
         for (int j = 0; j < 9; j++) {
+            
             if (n->sudo[i][j] == 0) {
                 return 0;
             }
+            
         }
     }
     return 1;
