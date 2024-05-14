@@ -119,13 +119,13 @@ int is_valid(Node *n) {
 }
 
 
-List* get_adj_nodes(Node* n){
+List* get_adj_nodes(Node* n) {
     List* list = createList();
 
     for(int i = 0; i < 9; i++) {
         for(int j = 0; j < 9; j++) {
             if (n->sudo[i][j] == 0) {
-                for (int num = 1; num <= 9; num++) {
+                for (int num = 1; num <= 3; num++) {  // Changed the loop condition to generate only 3 nodes
                     Node* new_node = copy(n);
                     new_node->sudo[i][j] = num;
                     if (is_valid(new_node)) {
@@ -140,7 +140,6 @@ List* get_adj_nodes(Node* n){
 
     return list;
 }
-
 
 int is_final(Node* n) {
     
