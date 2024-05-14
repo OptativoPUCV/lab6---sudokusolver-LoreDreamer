@@ -54,11 +54,9 @@ void print_node(Node* n){
 int is_valid(Node *n) {
 
     for (int i = 0; i < 9; i++) {
-        
         int row_check[10] = {0};
         
         for (int j = 0; j < 9; j++) {
-            
             int num = n->sudo[i][j];
             
             if (num != 0) {
@@ -68,17 +66,15 @@ int is_valid(Node *n) {
                 } else {
                     row_check[num] = 1;
                 }
-                
+        
             }
         }
     }
 
     for (int j = 0; j < 9; j++) {
-        
         int col_check[10] = {0};
         
         for (int i = 0; i < 9; i++) {
-            
             int num = n->sudo[i][j];
             
             if (num != 0) {
@@ -94,7 +90,6 @@ int is_valid(Node *n) {
     }
 
     for (int k = 0; k < 9; k++) {
-        
         int sub_check[10] = {0};
         
         for (int p = 0; p < 9; p++) {
@@ -114,26 +109,31 @@ int is_valid(Node *n) {
             }
         }
     }
-
     return 1;
 }
 
 
 List* get_adj_nodes(Node* n) {
+    
     List* list = createList();
+    
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
+            
             if (n->sudo[i][j] == 0) {
+                
                 for (int num = 1; num <= 9; num++) {
+                    
                     Node* new_node = copy(n);
                     new_node->sudo[i][j] = num;
+                    
                     if (is_valid(new_node)) {
                         pushBack(list, new_node);
                     } else {
-                        free(new_node); // Free the node if it's not valid
+                        free(new_node); 
                     }
                 }
-                return list; // Return the list once we've processed this empty cell
+                return list;
             }
         }
     }
