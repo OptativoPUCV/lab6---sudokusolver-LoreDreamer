@@ -55,3 +55,14 @@ sudoku.c:151:13: error: implicit declaration of function ‘compare_nodes’ [-W
 cc1: all warnings being treated as errors
 Compilation failed
 0c17759
+Tue 14 May 2024 10:52:31 PM UTC: 
+ sudoku.c | 22 +++++++++++-----------
+ 1 file changed, 11 insertions(+), 11 deletions(-)
+In file included from test.c:5:
+sudoku.c: In function ‘get_adj_nodes’:
+sudoku.c:132:30: error: implicit declaration of function ‘is_node_in_list’ [-Werror=implicit-function-declaration]
+  132 |                         if (!is_node_in_list(list, new_node)) { // Check if node already exists in list
+      |                              ^~~~~~~~~~~~~~~
+cc1: all warnings being treated as errors
+Compilation failed
+89f6f87

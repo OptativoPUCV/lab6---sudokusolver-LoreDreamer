@@ -145,17 +145,6 @@ List* get_adj_nodes(Node* n) {
     return list;
 }
 
-int is_node_in_list(List* list, Node* n) {
-    Node* current = first(list);
-    while (current != NULL) {
-        if (compare_nodes(current, n) == 1) {
-            return 1; // Node already exists in the list
-        }
-        current = next(list);
-    }
-    return 0; // Node not found in the list
-}
-
 int compare_nodes(Node* n1, Node* n2){
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
@@ -165,6 +154,17 @@ int compare_nodes(Node* n1, Node* n2){
         }
     }
     return 1; // Nodes are the same
+}
+
+int is_node_in_list(List* list, Node* n) {
+    Node* current = first(list);
+    while (current != NULL) {
+        if (compare_nodes(current, n) == 1) {
+            return 1; // Node already exists in the list
+        }
+        current = next(list);
+    }
+    return 0; // Node not found in the list
 }
 
 int is_final(Node* n) {
