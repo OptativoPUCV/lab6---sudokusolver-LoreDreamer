@@ -129,11 +129,11 @@ List* get_adj_nodes(Node* n) {
                     new_node->sudo[i][j] = num;
                     if (is_valid(new_node)) {
                         pushBack(list, new_node);
-                        break;  // Stop generating nodes for this cell once a valid number is found
                     } else {
                         free(new_node); // Free the node if it's not valid
                     }
                 }
+                return list; // Return the list once we've processed this empty cell
             }
         }
     }
