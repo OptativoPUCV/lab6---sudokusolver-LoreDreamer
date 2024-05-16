@@ -124,13 +124,13 @@ List* get_adj_nodes(Node* n) {
                 
                 for (int num = 1; num <= 9; num++) {
                     
-                    Node* new_node = copy(n);
-                    new_node->sudo[i][j] = num;
+                    Node* newNode = copy(n);
+                        newNode->sudo[i][j] = num;
                     
-                    if (is_valid(new_node)) {
-                        pushBack(list, new_node);
+                    if (is_valid(newNode)) {
+                        pushBack(list, newNode);
                     } else {
-                        free(new_node); 
+                        free(newNode); 
                     }
                 }
                 return list;
