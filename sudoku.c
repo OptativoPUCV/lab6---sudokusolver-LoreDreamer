@@ -54,43 +54,46 @@ void print_node(Node* n){
 int is_valid(Node *n) {
 
     for (int i = 0; i < 9; i++) {
-        int row_check[10] = {0};
+        
+        int rCheckArray[10] = {0};
         
         for (int j = 0; j < 9; j++) {
+            
             int num = n->sudo[i][j];
             
             if (num != 0) {
                 
-                if (row_check[num] == 1) {
+                if (rCheckArray[num] == 1)
                     return 0;
-                } else {
-                    row_check[num] = 1;
-                }
-        
+                else
+                    rCheckArray[num] = 1;
+                
             }
         }
     }
 
     for (int j = 0; j < 9; j++) {
-        int col_check[10] = {0};
+        
+        int cCheckArray[10] = {0};
         
         for (int i = 0; i < 9; i++) {
+            
             int num = n->sudo[i][j];
             
             if (num != 0) {
                 
-                if (col_check[num] == 1) {
+                if (cCheckArray[num] == 1)
                     return 0;
-                } else {
-                    col_check[num] = 1;
-                }
+                else
+                    cCheckArray[num] = 1;
                 
             }
         }
     }
 
     for (int k = 0; k < 9; k++) {
-        int sub_check[10] = {0};
+        
+        int sCheckArray[10] = {0};
         
         for (int p = 0; p < 9; p++) {
             
@@ -100,12 +103,11 @@ int is_valid(Node *n) {
             
             if (num != 0) {
                 
-                if (sub_check[num] == 1) {
+                if (sCheckArray[num] == 1)
                     return 0;
-                } else {
-                    sub_check[num] = 1;
-                }
-                
+                else
+                    sCheckArray[num] = 1;
+
             }
         }
     }
@@ -131,7 +133,7 @@ List* get_adj_nodes(Node* n) {
                         pushBack(list, newNode);
                     else 
                         free(newNode); 
-                    
+        
                 }
                 return list;
             }
@@ -146,8 +148,10 @@ int is_final(Node* n) {
 
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < 9; j++) {
+            
             if (n->sudo[i][j] == 0)
                 return 0;
+            
         }
     }
     return 1;
@@ -159,12 +163,12 @@ Node* DFS(Node* initial, int* cont) {
     push(stack, initial);
 
     while (!is_empty(stack)) {
+        
         Node* current_node = top(stack);
         pop(stack);
 
-        if (is_final(current_node)) {
+        if (is_final(current_node))
             return current_node;
-        }
 
         List* adj_nodes = get_adj_nodes(current_node);
         Node* adj_node = first(adj_nodes);
@@ -173,9 +177,9 @@ Node* DFS(Node* initial, int* cont) {
             push(stack, adj_node);
             cont[0]++;
             adj_node = next(adj_nodes);
+            
         }
     }
-
     return NULL;
 }
 
