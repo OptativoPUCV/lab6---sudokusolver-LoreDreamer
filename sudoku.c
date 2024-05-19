@@ -51,7 +51,7 @@ void print_node(Node* n){
     
 }
 
-int is_valid(Node *n) {
+int is_valid (Node *n) {
 
     for (int i = 0; i < 9; i++) {
         
@@ -142,8 +142,6 @@ List* get_adj_nodes(Node* n) {
     return list;
 }
 
-
-
 int is_final(Node* n) {
 
     for (int i = 0; i < 9; i++) {
@@ -175,7 +173,6 @@ Node* DFS(Node* initial, int* cont) {
 
         while (adj_node != NULL) {
             push(stack, adj_node);
-            cont[0]++;
             adj_node = next(adj_nodes);
             
         }
