@@ -162,12 +162,13 @@ Node* DFS(Node* initial, int* cont) {
 
     while (!is_empty(stack)) {
         
-        Node* current_node = pop(stack);
+        Node* current = top(stack);
+        pop(stack);
 
-        if (is_final(current_node))
-            return current_node;
+        if (is_final(current))
+            return current;
 
-        List* adj_nodes = get_adj_nodes(current_node);
+        List* adj_nodes = get_adj_nodes(current);
         Node* adj_node = first(adj_nodes);
 
         while (adj_node != NULL) {
