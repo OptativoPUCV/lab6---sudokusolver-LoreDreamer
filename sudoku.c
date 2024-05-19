@@ -168,12 +168,12 @@ Node* DFS(Node* initial, int* cont) {
         if (is_final(current))
             return current;
 
-        List* adj_nodes = get_adj_nodes(current);
-        Node* adj_node = first(adj_nodes);
+        List* adjNodes = get_adj_nodes(current);
+        Node* adjNode = first(adjNodes);
 
-        while (adj_node != NULL) {
-            push(stack, adj_node);
-            adj_node = next(adj_nodes);
+        while (adjNode != NULL) {
+            push(stack, adjNode);
+            adjNode = next(adjNodes);
             
         }
     }
